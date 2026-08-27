@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const h = Math.floor(seconds / 3600);
             const m = Math.floor((seconds % 3600) / 60);
             const s = seconds % 60;
-            timeDisplay.textContent = `SP ${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            timeDisplay.textContent = `AM ${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }, 1000);
     }
 });
