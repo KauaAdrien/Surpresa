@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Dispara o som no clique
         vhsAudio.play(); 
 
+        // Vibra por 200ms, pausa por 100ms, vibra por 200ms
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+
         introScreen.classList.add("hidden");
         staticScreen.classList.remove("hidden");
 
