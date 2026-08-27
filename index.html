@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonte pixelada retrô do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Efeito de tela de tubo (CRT) que fica por cima de tudo -->
+    <div class="crt-overlay"></div>
+
+    <main class="container">
+        <!-- Tela Inicial: Inserir a fita -->
+        <section id="intro-screen">
+            <div class="cassette-icon">
+                <div class="cassette-label">
+                    <span class="label-text">PARA VOCÊ</span>
+                    <div class="reels-area">
+                        <div class="reel"></div>
+                        <div class="tape-window"></div>
+                        <div class="reel"></div>
+                    </div>
+                </div>
+            </div>
+            <button id="play-btn" class="vcr-font">▶ INSERT TAPE</button>
+        </section>
+
+        <!-- Efeito de ruído/estática (escondido inicialmente) -->
+        <section id="static-screen" class="hidden">
+            <div class="noise"></div>
+        </section>
+
+        <!-- Mensagem Final -->
+        <section id="message-screen" class="hidden">
+            <div class="vcr-osd">
+                <span class="play-icon">▶ PLAY</span>
+                <span class="date">SP 0:00:00</span>
+            </div>
+            
+            <div class="content">
+                <h1 class="vcr-font glitch" data-text="Oiii!">Oiii!</h1>
+                <p class="vcr-font message-text">
+                    Aqui você escreve o seu texto especial. 
+                    Mostre que esse site foi feito do zero só para ela!
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- O áudio invisível -->
+    <audio id="vhs-audio" src="vhs-sound.wav"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
