@@ -125,7 +125,7 @@ section {
     width: 100%;
     height: 100%;
     /* Novo GIF: Tela azul de VCR com tracking/falhas */
-    background: url('Logo Film GIF by Emily Suber.gif');
+    background: url('Podcast Internet GIF by WNYC Studios.gif');
 
     background-position: center;
     background-repeat: no-repeat;
@@ -143,30 +143,67 @@ section {
     display: flex;
     justify-content: space-between;
     font-size: 1.8rem;
-    color: #0f0; /* Verde clássico de OSD */
+    color: #0f0; 
     text-shadow: 2px 2px 0px #000, 0 0 10px #0f0;
+    z-index: 10;
 }
 
-.content {
-    margin-top: 60px;
+/* Área que permite rolar o texto longo */
+.scrollable-content {
+    margin-top: 80px;
+    height: 75vh;
+    width: 100%;
+    overflow-y: auto; /* Habilita o scroll vertical */
+    padding: 0 15px 50px 15px;
+    text-align: left; /* Alinhado à esquerda para leitura de texto longo */
 }
+
+/* Customizando a barra de rolagem para ficar com cara de Hacker/Retro */
+.scrollable-content::-webkit-scrollbar { width: 4px; }
+.scrollable-content::-webkit-scrollbar-track { background: transparent; }
+.scrollable-content::-webkit-scrollbar-thumb { background: #0f0; }
 
 .vcr-font {
     text-shadow: 2px 2px 0px #000;
 }
 
 .message-text {
-    font-size: 1.5rem;
-    line-height: 1.4;
-    margin-top: 20px;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
     color: #fff;
 }
 
-/* Efeito Glitch no título */
+/* Efeito de revelar as palavras aos poucos */
+.fade-line {
+    opacity: 0; /* Começa invisível */
+    transform: translateY(15px); /* Começa um pouco para baixo */
+    transition: opacity 1.5s ease, transform 1.5s ease; /* Animação suave */
+}
+
+.fade-line.visible {
+    opacity: 1; /* Fica visível */
+    transform: translateY(0); /* Volta para a posição original */
+}
+
+.whatsapp-btn {
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+    color: #0f0;
+    text-decoration: none;
+    border: 1px solid #0f0;
+    padding: 15px;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* --- EFEITO GLITCH NO TÍTULO --- */
 .glitch {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Ajustado um pouco para caber bem no mobile */
     position: relative;
     color: #fff;
+    margin-bottom: 30px; /* Dá um espaço antes de começar o texto */
+    text-align: center;
 }
 
 .glitch::before, .glitch::after {
@@ -180,19 +217,38 @@ section {
 
 .glitch::before {
     left: 2px;
-    text-shadow: -2px 0 #ff00c1;
+    text-shadow: -2px 0 #ff00c1; /* Sombra rosa/neon */
     clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
+    animation: glitch-anim 3s infinite linear alternate-reverse;
 }
 
 .glitch::after {
     left: -2px;
-    text-shadow: -2px 0 #00fff9;
+    text-shadow: -2px 0 #00fff9; /* Sombra ciano/neon */
     clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
+    animation: glitch-anim2 2.5s infinite linear alternate-reverse;
 }
 
-.whatsapp-btn {
+/* As animações que fazem o texto "quebrar" (interferência de VHS) */
+@keyframes glitch-anim {
+    0% { clip: rect(15px, 9999px, 90px, 0); }
+    20% { clip: rect(65px, 9999px, 15px, 0); }
+    40% { clip: rect(30px, 9999px, 5px, 0); }
+    60% { clip: rect(85px, 9999px, 50px, 0); }
+    80% { clip: rect(10px, 9999px, 80px, 0); }
+    100% { clip: rect(50px, 9999px, 20px, 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip: rect(40px, 9999px, 10px, 0); }
+    20% { clip: rect(80px, 9999px, 85px, 0); }
+    40% { clip: rect(15px, 9999px, 40px, 0); }
+    60% { clip: rect(75px, 9999px, 15px, 0); }
+    80% { clip: rect(90px, 9999px, 70px, 0); }
+    100% { clip: rect(30px, 9999px, 30px, 0); }
+}
+
+/* .whatsapp-btn {
     display: inline-block;
     margin-top: 30px;
     color: #0f0;
@@ -200,4 +256,4 @@ section {
     border: 1px solid #0f0;
     padding: 10px 20px;
     background: rgba(0, 255, 0, 0.1);
-}
+} */

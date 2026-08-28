@@ -4,24 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const staticScreen = document.getElementById("static-screen");
     const messageScreen = document.getElementById("message-screen");
     
-    // Captura o elemento de áudio
     const vhsAudio = document.getElementById("vhs-audio"); 
 
     playBtn.addEventListener("click", () => {
-        // Dispara o som no clique
         vhsAudio.play(); 
-
-        // Vibra por 200ms, pausa por 100ms, vibra por 200ms
+        
+        // Vibração opcional se for celular
         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
 
         introScreen.classList.add("hidden");
         staticScreen.classList.remove("hidden");
 
-        // Ajustado para 9000ms (9 segundos) para bater com a duração do seu áudio
         setTimeout(() => {
             staticScreen.classList.add("hidden");
             messageScreen.classList.remove("hidden");
+            
             startVCRTimer();
+            revealText(); // Inicia o efeito do texto aparecendo
+            
         }, 9000); 
     });
 
@@ -35,5 +35,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const s = seconds % 60;
             timeDisplay.textContent = `AM ${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }, 1000);
+    }
+
+    // Função que faz os parágrafos aparecerem um por um
+    function revealText() {
+        const lines = document.querySelectorAll('.fade-line');
+        let delay = 0;
+        
+        lines.forEach((line) => {
+            setTimeout(() => {
+                line.classList.add('visible');
+            }, delay);
+            // Adiciona 1.5 segundos (1500ms) de atraso entre cada parágrafo
+            delay += 1500; 
+        });
     }
 });
