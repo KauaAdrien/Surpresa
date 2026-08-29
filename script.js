@@ -4,12 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const staticScreen = document.getElementById("static-screen");
     const messageScreen = document.getElementById("message-screen");
     
+    // Captura os dois áudios
     const vhsAudio = document.getElementById("vhs-audio"); 
+    const bgMusic = document.getElementById("bg-music"); 
+    
+    // Define o volume da música de fundo (0.0 a 1.0). 
+    // 0.2 significa 20% do volume original (bem baixinho e agradável)
+    bgMusic.volume = 0.15; 
 
     playBtn.addEventListener("click", () => {
         vhsAudio.play(); 
         
-        // Vibração opcional se for celular
         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
 
         introScreen.classList.add("hidden");
@@ -19,8 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
             staticScreen.classList.add("hidden");
             messageScreen.classList.remove("hidden");
             
+            // Dá o play na música suave exatamente aos 9 segundos
+            bgMusic.play(); 
+            
             startVCRTimer();
-            revealText(); // Inicia o efeito do texto aparecendo
+            revealText(); 
             
         }, 9000); 
     });
