@@ -4,16 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const staticScreen = document.getElementById("static-screen");
     const messageScreen = document.getElementById("message-screen");
     
-    // Captura os dois áudios
     const vhsAudio = document.getElementById("vhs-audio"); 
     const bgMusic = document.getElementById("bg-music"); 
-    
-    // Define o volume da música de fundo (0.0 a 1.0). 
-    // 0.2 significa 20% do volume original (bem baixinho e agradável)
-    bgMusic.volume = 0.15; 
 
     playBtn.addEventListener("click", () => {
+        // 1. Toca o primeiro áudio normalmente
         vhsAudio.play(); 
+        
+        // 2. O TRUQUE PARA O IPHONE:
+        // Dá o play na música de fundo IMEDIATAMENTE, mas com volume 0 (muda)
+        bgMusic.volume = 0;
+        bgMusic.play();
         
         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
 
@@ -24,8 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
             staticScreen.classList.add("hidden");
             messageScreen.classList.remove("hidden");
             
-            // Dá o play na música suave exatamente aos 9 segundos
-            bgMusic.play(); 
+            // 3. Aos 9 segundos, voltamos o tempo para o início 
+            // e levantamos o volume para 20% (0.2)
+            bgMusic.currentTime = 0;
+            bgMusic.volume = 0.2; 
             
             startVCRTimer();
             revealText(); 
