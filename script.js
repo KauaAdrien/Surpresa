@@ -8,13 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music"); 
 
     playBtn.addEventListener("click", () => {
-        // 1. Toca o primeiro áudio normalmente
+        // 1. Toca o VHS
         vhsAudio.play(); 
         
-        // 2. O TRUQUE PARA O IPHONE:
-        // Dá o play na música de fundo IMEDIATAMENTE, mas com volume 0 (muda)
-        bgMusic.volume = 0;
-        bgMusic.play();
+        // 2. O TRUQUE DO IPHONE (Unlock da mídia):
+        // Tentamos dar o play. Assim que o navegador permitir (Promise resolve),
+        // nós pausamos IMEDIATAMENTE antes de sair o som.
+        let playPromise = bgMusic.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                bgMusic.pause();
+                bgMusic.currentTime = 0; // Reseta pro início
+            }).catch(error => {
+                console.log("Erro no autoplay evitado.");
+            });
+        }
         
         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
 
@@ -25,10 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
             staticScreen.classList.add("hidden");
             messageScreen.classList.remove("hidden");
             
-            // 3. Aos 9 segundos, voltamos o tempo para o início 
-            // e levantamos o volume para 20% (0.2)
-            bgMusic.currentTime = 0;
-            bgMusic.volume = 0.2; 
+            // 3. Agora, 9 segundos depois, tocamos pra valer!
+            // Nota: O iPhone ignora o bgMusic.volume, ele vai tocar no volume do aparelho.
+            bgMusic.play(); 
             
             startVCRTimer();
             revealText(); 
